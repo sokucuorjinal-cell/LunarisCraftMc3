@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LunarisCraftMc | Resmi Web Sitesi</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #0a0a0c;
+  color: white;
+  overflow-x: hidden;
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+header {
+  text-align: center;
+  padding: 80px 20px 40px;
+}
+
+#typing {
+  font-size: 32px;
+  font-weight: bold;
+  color: #00d2ff;
+  text-shadow: 0 0 15px rgba(0, 210, 255, 0.6);
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
+}
+
+.card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 24px;
+  padding: 30px;
+  margin-bottom: 25px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.7);
+  transition: 0.3s;
+}
+
+h2 {
+  color: #00d2ff;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 26px;
+}
+
+/* IP ve Durum */
+.server-status {
+  text-align: center;
+}
+
+.ip-box {
+  background: #000;
+  border: 2px dashed #3498db;
+  padding: 15px;
+  border-radius: 12px;
+  display: inline-block;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 20px;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.ip-box:hover {
+  background: #111;
+  border-color: #00d2ff;
+  transform: scale(1.05);
+}
+
+/* VIP Grid */
+.vip-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.vip-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 25px;
+  border-radius: 20px;
+  text-align: center;
+  transition: 0.4s;
+}
+
+.vip-card:hover {
+  transform: translateY(-10px);
+  border-color: #00d2ff;
+}
+
+.vip-card.vip { color: #55ff55; }
+.vip-card.vip-plus { color: #55ffff; }
+.vip-card.mvp { color: #ff55ff; }
+
+.vip-features {
+  list-style: none;
+  padding: 0;
+  font-size: 15px;
+  color: #ccc;
+  line-height: 2;
+}
+
+/* Yetkili Başvuru Kartı */
+.staff-card {
+  border: 1px solid rgba(156, 204, 255, 0.3);
+  background: linear-gradient(135deg, rgba(0, 210, 255, 0.05), rgba(58, 123, 213, 0.1));
+}
+
+/* Butonlar */
+.btn {
+  display: block;
+  text-align: center;
+  padding: 16px;
+  background: linear-gradient(135deg, #7289da, #5865f2);
+  color: white;
+  text-decoration: none;
+  border-radius: 15px;
+  font-weight: bold;
+  margin-top: 15px;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.btn-staff {
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+}
+
+.btn:hover {
+  filter: brightness(1.2);
+  transform: scale(1.02);
+}
+
+.footer {
+  text-align: center;
+  padding: 50px;
+  opacity: 0.4;
+  font-size: 14px;
+}
+</style>
+</head>
+<body>
+
+<canvas id="stars"></canvas>
+
+<header>
+  <div id="typing"></div>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2>📡 Sunucu Durumu</h2>
+    <div class="server-status">
+      <div class="ip-box" onclick="copyIP()" title="Tıkla ve Kopyala">lunariscraft.mcsunucun.com:28074</div>
+      <p style="margin-top: 15px;">
+        🟢 Durum: <span id="online" style="font-weight: bold; color: #2ecc71;">Yükleniyor...</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>💎 VIP Paketleri</h2>
+    <div class="vip-grid">
+      <div class="vip-card vip">
+        <h3>⭐ VIP</h3>
+        <ul class="vip-features"><li>Özel Taglar</li><li>Özel Kitler</li><li>Dolu Giriş</li></ul>
+      </div>
+      <div class="vip-card vip-plus">
+        <h3>🌟 VIP+</h3>
+        <ul class="vip-features"><li>/pv Erişimi</li><li>Ekstra Sethome</li><li>Gelişmiş Kit</li></ul>
+      </div>
+      <div class="vip-card mvp">
+        <h3>💎 MVP</h3>
+        <ul class="vip-features"><li>/fly Yetkisi</li><li>Sınırsız Ev</li><li>Özel Renkler</li></ul>
+      </div>
+    </div>
+    <p style="text-align: center; margin-top: 20px;">VIP satın almak ve detaylı bilgi için Discord'a katılın!</p>
+    <a class="btn" href="https://discord.gg/DVTpAqrexg" target="_blank">Satın Alım İçin Discord</a>
+  </div>
+
+  <div class="card staff-card">
+    <h2>🛡️ Yetkili Başvurusu</h2>
+    <p style="text-align: center;">Ekibimize katılmak, sunucuyu yönetmek ve oyunculara yardımcı olmak ister misin? Rehber, Moderator ve Mimar alımlarımız devam ediyor!</p>
+    <a class="btn btn-staff" href="https://discord.gg/DVTpAqrexg" target="_blank">Yetkili Başvurusu İçin Discord'a Gel</a>
+  </div>
+
+</div>
+
+<div class="footer">© 2026 LunarisCraftMc — Tüm hakları saklıdır.</div>
+
+<script>
+// Yazı Yazma Efekti
+const text = "🌌 LunarisCraftMc Resmi Web Sitesi";
+let i = 0;
+function type() {
+  if (i < text.length) {
+    document.getElementById("typing").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(type, 70);
+  }
+}
+type();
+
+// Gerçek Oyuncu Sayısı API
+async function updateOnlineStatus() {
+    const ip = "lunariscraft.mcsunucun.com:28074";
+    const statusElement = document.getElementById("online");
+    try {
+        const response = await fetch(`https://api.mcsrvstat.us/2/${ip}`);
+        const data = await response.json();
+        if (data.online) {
+            statusElement.textContent = `${data.players.online} / ${data.players.max} Oyuncu`;
+        } else {
+            statusElement.textContent = "Sunucu Kapalı";
+        }
+    } catch (e) { statusElement.textContent = "Hata!"; }
+}
+updateOnlineStatus();
+setInterval(updateOnlineStatus, 30000);
+
+// Arkaplan Yıldızlar
+const canvas = document.getElementById("stars");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+let stars = [];
+for (let i = 0; i < 150; i++) {
+  stars.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, r: Math.random() * 1.5, s: Math.random() * 0.5 });
+}
+function animateStars() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "white";
+  stars.forEach(star => {
+    ctx.beginPath(); ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2); ctx.fill();
+    star.y += star.s; if (star.y > canvas.height) star.y = 0;
+  });
+  requestAnimationFrame(animateStars);
+}
+animateStars();
+
+function copyIP() {
+    const ip = "lunariscraft.mcsunucun.com:28074";
+    navigator.clipboard.writeText(ip);
+    alert("IP kopyalandı! Sunucuda görüşürüz!");
+}
+</script>
+</body>
+</html>
